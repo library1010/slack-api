@@ -18,6 +18,8 @@ sourceSets {
 }
 
 dependencies {
-	compile project(':slack-api-infra')
-	compile project(':slack-api-domain:slack-api-domain-ui')
+	compile project(':slack-api-domain:slack-api-domain-core')
+	
+	compile 'org.apache.httpcomponents:httpclient:4.5.2'
+	compile 'com.google.code.gson:gson:2.6.2'
 }
