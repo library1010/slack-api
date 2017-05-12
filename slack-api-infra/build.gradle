@@ -1,0 +1,25 @@
+sourceSets {
+    main {
+        java {
+          srcDir 'src/main/java'
+        }
+        resources {
+          srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+          srcDir 'src/test/java'
+        }
+        resources {
+          srcDir 'src/test/resources'
+        }
+    }
+}
+
+dependencies {
+	compile project(':slack-api-domain:slack-api-domain-core')
+	
+	compile 'org.apache.httpcomponents:httpclient:4.5.2'
+	compile 'com.google.code.gson:gson:2.6.2'
+}

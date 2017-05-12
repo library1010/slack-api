@@ -1,0 +1,15 @@
+group = 'com.hos.slack'
+archivesBaseName = 'slackapi'
+version = '1.0.0-SNAPSHOT'
+
+subprojects {
+	test {
+		testLogging {
+			exceptionFormat = 'full'
+			showStackTraces = 'true'
+		}
+	}
+	
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
