@@ -1,0 +1,23 @@
+group = 'com.hos.slack'
+archivesBaseName = 'slackapi'
+version = '1.0.0-SNAPSHOT'
+
+subprojects {
+	test {
+		testLogging {
+			exceptionFormat = 'full'
+			showStackTraces = 'true'
+		}
+	}
+	dependencies {
+	    compile 'org.slf4j:slf4j-api:1.7.21'
+	    compile 'org.projectlombok:lombok:1.16.8'
+	    compile 'org.apache.httpcomponents:httpclient:4.5.2'
+	
+	    testCompile 'junit:junit:4.12'
+	    testCompile 'org.jmockit:jmockit:1.24'
+	}
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}

@@ -1,0 +1,5 @@
+rootProject.name = 'slack-api'
+include ':slack-api-domain:slack-api-core',':slack-api-domain:slack-api-ui-component',':slack-api-sample'
+project(':slack-api-sample').name = "${rootProject.name}-sample" 
+project(':slack-api-domain:slack-api-core').name = "${rootProject.name}-domain-core" 
+project(':slack-api-domain:slack-api-ui-component').name = "${rootProject.name}-domain-ui" 
