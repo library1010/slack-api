@@ -8,12 +8,13 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public abstract class SlackUIComponent {
+public abstract class SlackUIComponent implements SlackUIObject<SlackAction> {
     
     private String name;
     private String text;
 
-    public SlackAction toSlackAction() {
+    @Override
+    public final SlackAction toSlackObject() {
         return buildAction().build();
     }
     

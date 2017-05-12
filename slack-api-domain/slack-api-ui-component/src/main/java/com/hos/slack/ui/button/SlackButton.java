@@ -1,13 +1,12 @@
 package com.hos.slack.ui.button;
 
 import com.hos.slack.core.SlackAction.SlackActionBuilder;
-import com.hos.slack.core.SlackConfirm;
 import com.hos.slack.ui.SlackUIComponent;
 
 public class SlackButton extends SlackUIComponent {
 
     private String value;
-    protected SlackConfirm slackConfirmation;
+    private SlackConfirmPopUp popup;
 
     public SlackButton(String name, String buttonText, String value) {
         super(name, buttonText);
@@ -16,11 +15,11 @@ public class SlackButton extends SlackUIComponent {
 
     @Override
     protected SlackActionBuilder buildAction() {
-        return super.buildAction().value(value).confirm(slackConfirmation);
+        return super.buildAction().value(value).confirm(popup == null ? null : popup.toConfirm());
     }
 
-    public SlackButton addConfirmMessage(String title, String text, String okText, String dismissText) {
-        this.slackConfirmation = SlackConfirm.builder().title(title).text(text).okText(okText).dismissText(dismissText).build();
+    public SlackButton addConfirmPopup(SlackConfirmPopUp popup) {
+        this.popup = popup;
         return this;
     }
 

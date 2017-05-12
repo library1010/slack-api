@@ -8,8 +8,9 @@ import java.util.Optional;
 
 import com.hos.slack.core.SlackAttachment;
 import com.hos.slack.ui.SlackUIComponent;
+import com.hos.slack.ui.SlackUIObject;
 
-public class SlackBlockquote {
+public class SlackBlockquote implements SlackUIObject<SlackAttachment> {
 
     private List<SlackUIComponent> uiComponents;
     private String text;
@@ -18,11 +19,12 @@ public class SlackBlockquote {
         this.text = text;
     }
 
-    public SlackAttachment toAttachment() {
+    @Override
+    public SlackAttachment toSlackObject() {
         return SlackAttachment
             .builder()
             .text(text)
-            .actions(Optional.ofNullable(uiComponents).orElse(new ArrayList<>()).stream().map(e -> e.toSlackAction()).collect(toList()))
+            .actions(Optional.ofNullable(uiComponents).orElse(new ArrayList<>()).stream().map(e -> e.toSlackObject()).collect(toList()))
             .build();
     }
 

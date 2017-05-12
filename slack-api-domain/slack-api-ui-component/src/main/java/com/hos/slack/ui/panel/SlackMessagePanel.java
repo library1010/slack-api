@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.hos.slack.core.SlackMessages;
+import com.hos.slack.ui.SlackUIObject;
 
-public class SlackMessagePanel {
+public class SlackMessagePanel implements SlackUIObject<SlackMessages> {
 
     private List<SlackBlockquote> blockquotes;
     private String text;
@@ -25,11 +26,12 @@ public class SlackMessagePanel {
         return this;
     }
 
-    public SlackMessages toSlackMessage() {
+    @Override
+    public SlackMessages toSlackObject() {
         return SlackMessages
             .builder()
             .text(text)
-            .attachments(Optional.ofNullable(blockquotes).orElse(new ArrayList<>()).stream().map(e -> e.toAttachment()).collect(toList()))
+            .attachments(Optional.ofNullable(blockquotes).orElse(new ArrayList<>()).stream().map(e -> e.toSlackObject()).collect(toList()))
             .build();
     }
 
