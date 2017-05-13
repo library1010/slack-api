@@ -58,7 +58,7 @@ public class SlackPostDirectInfra {
     }
 
     protected String getUrl() {
-        return "https://hooks.slack.com/services/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";
+        return "https://hooks.slack.com/services/...";
     }
 
     private boolean isSuccessStatus(int statusCode) {
