@@ -1,23 +1,25 @@
-sourceSets {
-    main {
-        java {
-          srcDir 'src/main/java'
-        }
-        resources {
-          srcDir 'src/main/resources'
-        }
-    }
-    test {
-        java {
-          srcDir 'src/test/java'
-        }
-        resources {
-          srcDir 'src/test/resources'
-        }
-    }
+buildscript {
+	ext {
+		springBootVersion = '1.5.3.RELEASE'
+	}
+    repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
 }
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
 
 dependencies {
 	compile project(':slack-api-infra')
 	compile project(':slack-api-domain:slack-api-domain-ui')
+	
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-websocket')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -18,16 +18,18 @@ import org.slf4j.LoggerFactory;
 
 import com.hos.slack.json.JsonServerMessage;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
 public class SlackIncomingWebhook {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SlackIncomingWebhook.class);
-    private String webhookUrl;
+    @Getter(value=AccessLevel.PROTECTED) private String webhookUrl;
 
     public void send(JsonServerMessage serverMessage) {
-        HttpPost httpPost = new HttpPost(getUrl());
+        HttpPost httpPost = new HttpPost(getWebhookUrl());
         httpPost.setEntity(new StringEntity(serverMessage.getStringEntity(), ContentType.create("application/json", "UTF-8")));
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
@@ -41,7 +43,7 @@ public class SlackIncomingWebhook {
         try (CloseableHttpResponse response = httpClient.execute(httpRequest)) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (!isSuccessStatus(statusCode)) {
-                getLogger().error("Cannot send data to " + getUrl() + " server! The receive status code: " + statusCode);
+                getLogger().error("Cannot send data to " + getWebhookUrl() + " server! The receive status code: " + statusCode);
                 getLogger().error(response.getEntity().toString());
             }
             readResponseContent(response);
@@ -60,10 +62,6 @@ public class SlackIncomingWebhook {
 
     private Logger getLogger() {
         return LOGGER;
-    }
-
-    protected String getUrl() {
-        return webhookUrl;
     }
 
     private boolean isSuccessStatus(int statusCode) {
