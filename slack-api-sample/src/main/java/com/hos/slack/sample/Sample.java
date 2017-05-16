@@ -1,6 +1,6 @@
 package com.hos.slack.sample;
 
-import com.hos.slack.infra.SlackPostDirectInfra;
+import com.hos.slack.infra.SlackIncomingWebhook;
 import com.hos.slack.json.implement.SlackMessagesJson;
 import com.hos.slack.ui.button.SlackButton;
 import com.hos.slack.ui.button.SlackButtonStyle;
@@ -21,6 +21,6 @@ public class Sample {
                         new StyleSlackButton("game", "Thermonuclear War", "war", SlackButtonStyle.DANGER).addConfirmPopup(
                             new SlackConfirmPopUp("Are you sure?", "Wouldn't you prefer a good game of chess?", "Yes", "No"))));
 
-        new SlackPostDirectInfra().post(new SlackMessagesJson(panel.toSlackObject()));
+        new SlackIncomingWebhook("incoming webhook url").send(new SlackMessagesJson(panel.toSlackObject()));
     }
 }
